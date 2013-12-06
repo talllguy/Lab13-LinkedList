@@ -18,8 +18,7 @@ using namespace std;
 int main()
 {
 char runQuestion = 'Y';
-int arraySize = 0;
-const int maxArraySize = 10;
+int i;
 
 cout << "Do you want to start(Y/N): ";
 cin >> runQuestion;
@@ -33,35 +32,51 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 		node *next;
 	};
 
-	node *q = new node;
-	node *head;
-	head = q;
-	q->data = maxArraySize;    // assume the list contains 10 numbers
+	node *q, *head;
+	head = new node;
+	head->data = 0;
+	head->next = NULL;
+	node *p;
+	p = head;
 
-	// fill array
-	for (int i = 0; i < maxArraySize; i++)
+	cin >> i;
+	while (i != -1)
 	{
-		node *p = new node;
-		while (!(cin >> p->data)) // error check
-		{
-			cin.clear();     // Clear the error flags
-			cin.ignore(100, '\n');    // Remove unwanted characters from buffer
-			cout << "\aInvalid entry. Enter a number: ";   // Re-issue the prompt
-		}
-		q->next = p;
-		q = p;
-
-		}
-
-	// print
-	cout << "The array elements are: ";
-
-	for (int i = 0; i < arraySize; i++)
-	{
-	cout << q->data;
-	q = q->next;
+		q = new node;
+		q->data = i;
+		head->data++;
+		q->next = NULL;
+		p->next = q;
+		p = q;
+		cin >> i;
 	}
 
+	// print
+	cout << "The node elements are:\n";
+
+	p = head->next;
+	while (p != NULL)
+	{
+		cout << p->data << endl;
+		p = p->next;
+	}
+
+	node *t = new node;
+	t->data = 25;
+	t->next = q->next;
+	q->next = t;
+
+	p = head->next;
+	if (p != NULL && p->data <=25)
+	{
+		cout << p->data << endl;
+		p = p->next;
+	}
+	else if (p != NULL)
+	{
+
+	}
+	
 
 	cout << "Do you want to continue(Y/N): ";
 	cin >> runQuestion;
