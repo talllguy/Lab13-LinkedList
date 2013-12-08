@@ -18,7 +18,6 @@ using namespace std;
 int main()
 {
 char runQuestion = 'Y';
-int i;
 
 cout << "Do you want to start(Y/N): ";
 cin >> runQuestion;
@@ -32,51 +31,57 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 		node *next;
 	};
 
-	node *q, *head;
-	head = new node;
-	head->data = 0;
-	head->next = NULL;
-	node *p;
-	p = head;
-
-	cin >> i;
-	while (i != -1)
+	node *head = NULL; // set up header null to first pointer
+	
+	node *pointerP, *pointerQ; // pointers
+	
+	for (int i = 0; i < 10; i++)
 	{
-		q = new node;
-		q->data = i;
-		head->data++;
-		q->next = NULL;
-		p->next = q;
-		p = q;
-		cin >> i;
+		// Reserve space for new node and fill it with data 
+		pointerP = new node;
+		cout << "Please enter a number: ";
+		cin >> pointerP->data;
+		pointerP->next = NULL;
+
+		// Set up link to this node 
+		if (head == NULL)
+			head = pointerP;
+		else
+		{
+			pointerQ = head; // We know this is not NULL - list not empty! 
+			while (pointerQ->next != NULL)
+				pointerQ = pointerQ->next; // Move to next link in chain 
+			pointerQ->next = pointerP;
+		}
 	}
 
 	// print
 	cout << "The node elements are:\n";
 
-	p = head->next;
-	while (p != NULL)
+	pointerP = head;
+	while (pointerP != NULL)
 	{
-		cout << p->data << endl;
-		p = p->next;
+		cout << pointerP->data << endl;
+		pointerP = pointerP->next;
 	}
 
-	node *t = new node;
-	t->data = 25;
-	t->next = q->next;
-	q->next = t;
+	// set up another node to add
+	//node *pointerT = new node;
+	//pointerT->data = 25; // change to cin
+	//pointerT->next = pointerQ->next;
+	//pointerQ->next = pointerT;
 
-	p = head->next;
-	if (p != NULL && p->data <=25)
-	{
-		cout << p->data << endl;
-		p = p->next;
-	}
-	else if (p != NULL)
-	{
+	//pointerP = head->next;
+	//if (pointerP != NULL && p->data <=25)
+	//{
+	//	cout << p->data << endl;
+	//	pointerP = p->next;
+	//}
+	//else if (pointerP != NULL)
+	//{
 
-	}
-	
+	//}
+	//
 
 	cout << "Do you want to continue(Y/N): ";
 	cin >> runQuestion;
