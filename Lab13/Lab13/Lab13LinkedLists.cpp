@@ -13,7 +13,11 @@ perform functions.
 #include <iostream>
 using namespace std;
 
-
+struct node
+{
+	int data;
+	node *next;
+};
 
 int main()
 {
@@ -24,23 +28,19 @@ cin >> runQuestion;
 
 while (runQuestion == 'Y' || runQuestion == 'y')
 {
-	// declare array with pointers
-	struct node
-	{
-		double data;
-		node *next;
-	};
-
+	
 	node *head = NULL; // set up header null to first pointer
 	
 	node *pointerP, *pointerQ; // pointers
+
+	cout << "Please enter 10 numbers, in numerical order, below:\n";
 	
 	for (int i = 0; i < 10; i++)
 	{
 		// Reserve space for new node and fill it with data 
 		pointerP = new node;
-		cout << "Please enter a number: ";
-		cin >> pointerP->data;
+		cout << (i + 1) << ". "; // 1. , 2. etc
+		cin >> pointerP->data; // validate (see #2)
 		pointerP->next = NULL;
 
 		// Set up link to this node 
@@ -65,23 +65,39 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 		pointerP = pointerP->next;
 	}
 
-	// set up another node to add
-	//node *pointerT = new node;
-	//pointerT->data = 25; // change to cin
-	//pointerT->next = pointerQ->next;
-	//pointerQ->next = pointerT;
 
-	//pointerP = head->next;
-	//if (pointerP != NULL && p->data <=25)
-	//{
-	//	cout << p->data << endl;
-	//	pointerP = p->next;
-	//}
-	//else if (pointerP != NULL)
-	//{
+	// add a number
 
-	//}
-	//
+	pointerP = head;
+	pointerQ = head;
+
+	int newNumber = 0;
+
+	cout << "Enter a number to insert:\n";
+	cin >> newNumber;
+	
+
+
+	while (pointerP->data < newNumber)
+	{
+		cout << "\nbefore P " << pointerP->data;
+		pointerQ = pointerP;
+		pointerP = pointerP->next;
+		cout << "\nafter P " << pointerP->data;
+	}
+	node *pointerT = new node;
+	pointerT->data = newNumber;
+	pointerT->next = pointerQ->next;
+	pointerQ->next = pointerT;
+
+	cout << "The node elements are:\n";
+
+	pointerP = head;
+	while (pointerP != NULL)
+	{
+		cout << pointerP->data << endl;
+		pointerP = pointerP->next;
+	}
 
 	cout << "Do you want to continue(Y/N): ";
 	cin >> runQuestion;
