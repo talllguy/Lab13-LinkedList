@@ -73,17 +73,15 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 
 	int newNumber = 0;
 
-	cout << "Enter a number to insert:\n";
+	cout << "Enter a number to insert: ";
 	cin >> newNumber;
 	
 
 
 	while (pointerP->data < newNumber)
 	{
-		cout << "\nbefore P " << pointerP->data;
 		pointerQ = pointerP;
 		pointerP = pointerP->next;
-		cout << "\nafter P " << pointerP->data;
 	}
 	node *pointerT = new node;
 	pointerT->data = newNumber;
@@ -92,6 +90,39 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 
 	cout << "The node elements are:\n";
 
+	pointerP = head;
+	while (pointerP != NULL)
+	{
+		cout << pointerP->data << endl;
+		pointerP = pointerP->next;
+	}
+
+	// delete a node
+
+	int deleteMe = 0;
+	bool flag = true;
+
+	cout << "Enter a number in the list to delete: ";
+	cin >> deleteMe;
+
+	pointerQ = head;
+	pointerP = pointerQ->next;
+	flag = true;
+	do {
+		if (pointerP->data == deleteMe)
+		{
+			pointerQ->next = pointerP->next;
+			delete pointerP;
+			flag = false;
+		}
+		else
+		{
+			pointerQ = pointerP;
+			pointerP = pointerP->next;
+		}
+	} while (flag && (pointerP->next != NULL));
+
+	// print
 	pointerP = head;
 	while (pointerP != NULL)
 	{
