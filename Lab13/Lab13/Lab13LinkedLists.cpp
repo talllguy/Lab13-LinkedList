@@ -39,8 +39,15 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 	{
 		// Reserve space for new node and fill it with data 
 		pointerP = new node;
-		cout << (i + 1) << ". "; // 1. , 2. etc
-		cin >> pointerP->data; // validate (see #2)
+		cout << (i + 1) << ": "; // 1: , 2: etc
+		
+		while (!(cin >> pointerP->data)) // Get the input and validate it
+		{
+			cin.clear();     // Clear the error flags
+			cin.ignore(100, '\n');    // Remove unwanted characters from buffer
+			cout << "\aError! Reenter " << (i+1) << ": ";   // Re-issue the prompt
+		}
+		
 		pointerP->next = NULL;
 
 		// Set up link to this node 
@@ -55,17 +62,6 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 		}
 	}
 
-	// print
-	cout << "The node elements are:\n";
-
-	pointerP = head;
-	while (pointerP != NULL)
-	{
-		cout << pointerP->data << endl;
-		pointerP = pointerP->next;
-	}
-
-
 	// add a number
 
 	pointerP = head;
@@ -74,10 +70,13 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 	int newNumber = 0;
 
 	cout << "Enter a number to insert: ";
-	cin >> newNumber;
+	while (!(cin >> newNumber)) // Get the input and validate it
+	{
+		cin.clear();     // Clear the error flags
+		cin.ignore(100, '\n');    // Remove unwanted characters from buffer
+		cout << "\aError! Reenter a number to insert: ";   // Re-issue the prompt
+	}
 	
-
-
 	while (pointerP->data < newNumber)
 	{
 		pointerQ = pointerP;
@@ -88,23 +87,19 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 	pointerT->next = pointerQ->next;
 	pointerQ->next = pointerT;
 
-	cout << "The node elements are:\n";
-
-	pointerP = head;
-	while (pointerP != NULL)
-	{
-		cout << pointerP->data << endl;
-		pointerP = pointerP->next;
-	}
-
 	// delete a node
 
 	int deleteMe = 0;
 	bool flag = true;
 
 	cout << "Enter a number in the list to delete: ";
-	cin >> deleteMe;
-
+	while (!(cin >> deleteMe)) // Get the input and validate it
+	{
+		cin.clear();     // Clear the error flags
+		cin.ignore(100, '\n');    // Remove unwanted characters from buffer
+		cout << "\aError! Reenter a number in the list to delete: ";   // Re-issue the prompt
+	}
+	
 	pointerQ = head;
 	pointerP = pointerQ->next;
 	flag = true;
@@ -123,6 +118,7 @@ while (runQuestion == 'Y' || runQuestion == 'y')
 	} while (flag && (pointerP->next != NULL));
 
 	// print
+
 	pointerP = head;
 	while (pointerP != NULL)
 	{
