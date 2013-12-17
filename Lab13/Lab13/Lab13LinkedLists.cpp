@@ -19,7 +19,7 @@ struct node  // set up node structure
 
 int main()
 {
-	char runQuestion = 'Y'; // cleck if the user wants to restart
+	char runQuestion = 'Y'; // check if the user wants to restart
 
 	while (runQuestion == 'Y' || runQuestion == 'y')
 	{
